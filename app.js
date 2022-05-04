@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const path = require('path')
 
 const PORT = 4000
 
@@ -9,6 +10,8 @@ app.set('views', 'views');
 // Middleware
 const { requireLogin } = require("./middleware/login.middleware");
 
+// Static files
+app.use(express.static(path.join(__dirname, '/public')));
 
 // Routes
 const loginRoute = require('./routes/login.routes')

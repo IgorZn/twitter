@@ -23,6 +23,7 @@
   "homepage": "https://github.com/IgorZn/twitter#readme",
   "dependencies": {
     "express": "^4.18.1",
+    "nodemon": "^2.0.16",
     "pug": "^3.0.2"
   }
 }

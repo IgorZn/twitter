@@ -15,9 +15,11 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 // Routes
 const loginRoute = require('./routes/login.routes')
+const registerRoute = require('./routes/register.routes')
 
 // Mount routes
 app.use('/login', loginRoute)
+app.use('/register', registerRoute)
 
 
 // Root path

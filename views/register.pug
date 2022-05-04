@@ -1,0 +1,17 @@
+extends layouts/login-layout
+
+block content
+    .loginContainer
+        h1 Register
+        form(method="post")
+            input(type="text", name="firstName", placeholder="First name", required="")
+            input(type="text", name="lastName", placeholder="Last name", required="")
+            input(type="text", name="userName", placeholder="User name", required="")
+            input(type="text", name="email", placeholder="E-mail", required="")
+
+            input(type="password", name="password", placeholder="Password", required="")
+            input(type="password", name="passwordConfirm", placeholder="Confirm password", required="")
+
+            input(type="submit", value="Login")
+
+        a(href="/login") Already have an account? Login here.

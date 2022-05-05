@@ -7,6 +7,14 @@ exports.register = asyncHandler( async (req, res, next) => {
     return res.status(200).render("register")
 });
 
+// @desc        Register user
+// @route       POST /register
+// @access      Public
+exports.postReg = asyncHandler( async (req, res, next) => {
+    console.log(req.body)
+    return res.status(200).render("login")
+});
+
 
 // @desc        Login user
 // @route       GET /login

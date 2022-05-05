@@ -1,8 +1,15 @@
 const express = require('express');
 const app = express();
 const path = require('path')
+const bodyParser = require('body-parser');
 
 const PORT = 4000
+
+// Body parsers
+    /* Pure POST */
+app.use(express.json());
+    /* Form-data POST */
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.set('view engine', 'pug');
 app.set('views', 'views');

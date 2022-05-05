@@ -5,17 +5,20 @@ const bodyParser = require('body-parser');
 
 const PORT = 4000
 
-// Body parsers
-    /* Pure POST */
-app.use(express.json());
-    /* Form-data POST */
-app.use(bodyParser.urlencoded({ extended: false }))
+
 
 app.set('view engine', 'pug');
 app.set('views', 'views');
 
 // Middleware
 const { requireLogin } = require("./middleware/login.middleware");
+
+// Body parsers
+    /* Pure POST */
+app.use(express.json());
+    /* Form-data POST */
+app.use(bodyParser.urlencoded({ extended: false }))
+
 
 // Static files
 app.use(express.static(path.join(__dirname, '/public')));

@@ -3,9 +3,13 @@ const app = express();
 const path = require('path')
 const bodyParser = require('body-parser');
 
+require('dotenv').config()
+
 const PORT = 4000
+const connectDB = require("./config/db");
 
-
+// Connect to DB
+connectDB()
 
 app.set('view engine', 'pug');
 app.set('views', 'views');
@@ -26,6 +30,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 // Routes
 const loginRoute = require('./routes/login.routes')
 const registerRoute = require('./routes/register.routes')
+
 
 // Mount routes
 app.use('/login', loginRoute)

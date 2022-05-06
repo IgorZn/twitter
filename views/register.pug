@@ -5,8 +5,9 @@ block content
         h1 Register
         form#registerForm(method="post", onsubmit="event.preventDefault(); validateForm()")
 
-            each val in errorsMessage
-                p.errors= val.msg
+            if errorsMessage
+                each val in errorsMessage
+                    p.errors= val.msg
 
             input(type="text", name="firstName", placeholder="First name", value=firstName, required="")
             input(type="text", name="lastName", placeholder="Last name", value=lastName, required="")

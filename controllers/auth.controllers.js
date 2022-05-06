@@ -1,5 +1,7 @@
 const asyncHandler = require('../middleware/async');
+const User = require('../models/user.mongo');
 const { validationResult, body} = require('express-validator');
+
 
 // @desc        Register user
 // @route       GET /register
@@ -7,6 +9,7 @@ const { validationResult, body} = require('express-validator');
 exports.register = asyncHandler( async (req, res, next) => {
     return res.status(200).render("register")
 });
+
 
 // @desc        Register user
 // @route       POST /register
@@ -22,16 +25,25 @@ exports.postReg = asyncHandler( async (req, res, next) => {
         }
     })
 
-    console.log('cleaned body -->', req.body);
     body(req.body['userName']).not().isEmpty();
 
     if (!errors.isEmpty()) {
-        console.log()
         req.body.errorsMessage = errors.array()
         let payload = req.body
-        console.log(req.body)
         return res.status(404).render("register", payload)
     }
+
+    const { firstName, lastName, userName, email, password } = req.body
+
+    const user = await User.findOne({
+        $or: [
+            { username: userName },
+            { email: email }
+        ]
+    }).then( user => {
+        console.log(user)
+    })
+
     return res.status(200).render("login")
 });
 

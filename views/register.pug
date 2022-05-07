@@ -6,7 +6,10 @@ block content
         form#registerForm(method="post", onsubmit="event.preventDefault(); validateForm()")
 
             if errorsMessage
-                each val in errorsMessage
+                p.errors= errorsMessage
+
+            if errorsMessages
+                each val in errorsMessages
                     p.errors= val.msg
 
             input(type="text", name="firstName", placeholder="First name", value=firstName, required="")

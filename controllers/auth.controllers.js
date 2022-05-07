@@ -1,6 +1,6 @@
 const asyncHandler = require('../middleware/async');
 const User = require('../models/user.mongo');
-const { validationResult, body} = require('express-validator');
+const { validationResult, body, check} = require('express-validator');
 
 
 // @desc        Register user
@@ -25,26 +25,52 @@ exports.postReg = asyncHandler( async (req, res, next) => {
         }
     })
 
+    // Check userName
     body(req.body['userName']).not().isEmpty();
 
+    // Show errors
     if (!errors.isEmpty()) {
-        req.body.errorsMessage = errors.array()
+        req.body.errorsMessages = errors.array()
         let payload = req.body
         return res.status(404).render("register", payload)
     }
 
     const { firstName, lastName, userName, email, password } = req.body
 
+    // Check for already exist
+    console.log( '-------->',userName, email)
     const user = await User.findOne({
         $or: [
             { username: userName },
             { email: email }
         ]
-    }).then( user => {
-        console.log(user)
+    })
+        .then( user => {
+            console.log('user -->', user)
+        })
+        .catch( e => {
+            console.log(e)
     })
 
-    return res.status(200).render("login")
+    // Create user if OK
+    console.log('user ---->',user)
+    if (!user) {
+        // No user found
+        await User.create(req.body)
+            .then( result => {
+                console.log('newUser -->', result)
+                return res.status(200).render("login");
+            })
+            .catch( e => {
+                req.body.errorsMessage = e.message
+                return res.status(200).render("register", req.body);
+            })
+
+
+
+    }
+
+    return res.status(200).render("login");
 });
 
 

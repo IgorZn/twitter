@@ -38,27 +38,26 @@ exports.postReg = asyncHandler( async (req, res, next) => {
     const { firstName, lastName, userName, email, password } = req.body
 
     // Check for already exist
-    console.log( '-------->',userName, email)
+    console.log( '-------->', userName, email)
     const user = await User.findOne({
         $or: [
-            { username: userName },
+            { userName: userName },
             { email: email }
         ]
     })
-        .then( user => {
-            console.log('user -->', user)
+        .then( result => {
+            console.log('result -->', result)
+            // Create user if OK
         })
         .catch( e => {
-            console.log(e)
-    })
+            console.log(e) })
 
     // Create user if OK
-    console.log('user ---->',user)
     if (!user) {
-        // No user found
-        await User.create(req.body)
-            .then( result => {
-                console.log('newUser -->', result)
+        // No user found, create
+        console.log({ firstName, lastName, userName, email, password })
+        await User.create({ firstName, lastName, userName, email, password })
+            .then( () => {
                 return res.status(200).render("login");
             })
             .catch( e => {
@@ -66,11 +65,9 @@ exports.postReg = asyncHandler( async (req, res, next) => {
                 return res.status(200).render("register", req.body);
             })
 
-
-
     }
 
-    return res.status(200).render("login");
+
 });
 
 

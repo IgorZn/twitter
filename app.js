@@ -2,10 +2,11 @@ const express = require('express');
 const app = express();
 const path = require('path')
 const bodyParser = require('body-parser');
+const session = require('express-session');
 
 require('dotenv').config()
 
-const PORT = 4000
+const PORT = process.env.PORT
 const connectDB = require("./config/db");
 
 // Connect to DB
@@ -14,8 +15,15 @@ connectDB()
 app.set('view engine', 'pug');
 app.set('views', 'views');
 
-// Middleware
+// My Middleware
 const { requireLogin } = require("./middleware/login.middleware");
+
+app.use(session({
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: false,
+    // cookie: { secure: true }
+}))
 
 // Body parsers
     /* Pure POST */

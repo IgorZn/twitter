@@ -55,10 +55,10 @@ exports.postReg = asyncHandler( async (req, res, next) => {
     // Create user if OK
     if (!user) {
         // No user found, create
-        console.log({ firstName, lastName, userName, email, password })
         await User.create({ firstName, lastName, userName, email, password })
-            .then( () => {
-                return res.status(200).render("login");
+            .then( (newUser) => {
+                req.session.user = newUser;
+                return res.status(200).redirect("/");
             })
             .catch( e => {
                 req.body.errorsMessage = e.message

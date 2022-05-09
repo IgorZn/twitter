@@ -48,7 +48,8 @@ app.use('/register', registerRoute)
 // Root path
 app.get('/', requireLogin, (req, res, next) => {
     let payload = {
-        pageTitle: "Home page title"
+        pageTitle: "Home page title",
+        userLoggedIn: req.session.user
     }
 
     res.status(200).render("home", payload)

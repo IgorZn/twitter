@@ -1,5 +1,6 @@
 const asyncHandler = require('../middleware/async');
 const User = require('../models/user.mongo');
+const bcrypt = require('bcryptjs');
 const { validationResult, body, check} = require('express-validator');
 
 
@@ -45,10 +46,6 @@ exports.postReg = asyncHandler( async (req, res, next) => {
             { email: email }
         ]
     })
-        .then( result => {
-            console.log('result -->', result)
-            // Create user if OK
-        })
         .catch( e => {
             console.log(e) })
 
@@ -76,4 +73,40 @@ exports.postReg = asyncHandler( async (req, res, next) => {
 // @access      Public
 exports.login = asyncHandler( async (req, res, next) => {
     return res.status(200).render("login")
+});
+
+
+// @desc        Login user
+// @route       POST /login
+// @access      Public
+exports.loginPost = asyncHandler( async (req, res, next) => {
+    const { logUserName, logPassword } = req.body
+
+    if (logUserName && logPassword) {
+        const user = await User.findOne({
+            $or: [
+                { userName: logUserName },
+                { email: logUserName }
+            ]
+        })
+            .catch( e => {
+                req.body.errorsMessage = e.message
+                return res.status(200).render("login", req.body);
+            })
+
+        if (user) {
+            const compared = await bcrypt.compare(logPassword, user.password);
+
+            if (compared) {
+                req.session.user = user;
+                return res.status(200).redirect("/");
+            }
+
+        } else {
+            req.body.errorsMessage = "No such user"
+            return res.status(200).render("login", req.body);
+        }
+
+
+    }
 });

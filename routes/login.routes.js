@@ -1,5 +1,6 @@
 const {
-    login
+    login,
+    loginPost
 } = require("../controllers/auth.controllers");
 
 
@@ -12,6 +13,7 @@ app.set('views', 'views');
 
 router.route('/')
     .get(login)
+    .post(loginPost)
 
 
 module.exports = router;

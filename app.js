@@ -37,11 +37,13 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 // Routes
 const loginRoute = require('./routes/login.routes')
+const logoutRoute = require('./routes/logout.routes')
 const registerRoute = require('./routes/register.routes')
 
 
 // Mount routes
 app.use('/login', loginRoute)
+app.use('/logout', logoutRoute)
 app.use('/register', registerRoute)
 
 

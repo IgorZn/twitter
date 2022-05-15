@@ -68,8 +68,20 @@ exports.postReg = asyncHandler( async (req, res, next) => {
 });
 
 
-// @desc        Login user
-// @route       GET /login
+// @desc        Logout user
+// @route       GET /logout
+// @access      Public
+exports.logout = asyncHandler( async (req, res, next) => {
+    if (req.session) {
+        req.session.destroy( () => {
+            return res.status(200).redirect("/login")
+        })
+    }
+});
+
+
+// @desc        Log out user
+// @route       GET /logout
 // @access      Public
 exports.login = asyncHandler( async (req, res, next) => {
     return res.status(200).render("login")

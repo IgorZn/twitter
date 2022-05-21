@@ -9,4 +9,17 @@ $("#postTextarea").on("keyup",event => {
     if (!value) return submitButton.prop("disabled", true);
 
     submitButton.prop("disabled", false)
+});
+
+$("#submitPostButton").on("click", event => {
+    let button = $(event.target);
+    let textbox = $("#postTextarea");
+
+    let data = {
+        content: textbox.val(),
+    };
+
+    $.post("/api/post", data, (postData, status, xhr)=> {
+
+    })
 })

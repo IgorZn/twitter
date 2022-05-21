@@ -2,7 +2,7 @@ mixin createPostForm(userLoggedIn)
     .postFormContainer
         .userImageContainer
             img(src=userLoggedIn.profilePic, alt="User's profile picture")
-        .textAreaContainer
-                textarea#postTextarea(placeholder="What's happening?")
-                .buttonsContainer
-                    button#submitPostButton(disable="") Post
+        .textareaContainer
+            textarea#postTextarea(placeholder="What's happening?")
+            .buttonsContainer
+                button#submitPostButton(disabled="") Post

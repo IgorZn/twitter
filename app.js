@@ -36,15 +36,17 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, '/public')));
 
 // Routes
-const loginRoute = require('./routes/login.routes')
-const logoutRoute = require('./routes/logout.routes')
-const registerRoute = require('./routes/register.routes')
+const loginRoute = require('./routes/login.routes');
+const logoutRoute = require('./routes/logout.routes');
+const registerRoute = require('./routes/register.routes');
+const postsRoute = require('./routes/posts.routes');
 
 
 // Mount routes
-app.use('/login', loginRoute)
-app.use('/logout', logoutRoute)
-app.use('/register', registerRoute)
+app.use('/login', loginRoute);
+app.use('/logout', logoutRoute);
+app.use('/register', registerRoute);
+app.use('/api/posts', postsRoute);
 
 
 // Root path

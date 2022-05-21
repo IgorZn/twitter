@@ -20,6 +20,6 @@ $("#submitPostButton").on("click", event => {
     };
 
     $.post("/api/posts", data, (postData, status, xhr)=> {
-
+        alert(postData)
     })
 })

@@ -12,6 +12,10 @@ exports.getPosts = asyncHandler( async (req, res, next) => {
 // @route       POST /api/posts
 // @access      Private
 exports.sendPosts = asyncHandler( async (req, res, next) => {
+    if (!req.body.content) {
+        console.log('Content param not specified')
+        return res.status(400).send("it's NOT worked!")
+    }
     res.status(200).send("it worked!")
 
 

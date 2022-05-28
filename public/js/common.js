@@ -20,6 +20,15 @@ $("#submitPostButton").on("click", event => {
     };
 
     $.post("/api/posts", data, (postData, status, xhr) => {
-        console.log('Post data:', postData)
+        let html = createPostHtml(postData);
+        $(".postConteiner").prepend(html); // add element at the beginning NOT at the end
+        textbox.val("");
+        button.prop("disable", true);
+
+
     });
-})
+});
+
+function createPostHtml(postDate) {
+    return postDate.content;
+}

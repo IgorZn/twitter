@@ -32,6 +32,8 @@ $("#submitPostButton").on("click", event => {
 function createPostHtml(postData) {
     // return html value of textarea
     let postedBy = postData.postedBy;
+    let displayName = `${postedBy.firstName} ${postedBy.lastName}`;
+    let timeStamp = postData.createdAt;
 
     return `<div class='post'>
                 <div class='mainContentContainer'>
@@ -40,6 +42,9 @@ function createPostHtml(postData) {
                     </div>
                     <div class='postContentContainer'>
                         <div class='header'>
+                            <a href="/profile/${postedBy.userName}">@${displayName}</a>
+                            <span class="username">${postedBy.userName}</span>
+                            <span class="username">${timeStamp}</span>
                         </div>
                         <div class='postBody'>
                             <span>${postData.content}</span>

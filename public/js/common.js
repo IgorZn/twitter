@@ -20,15 +20,33 @@ $("#submitPostButton").on("click", event => {
     };
 
     $.post("/api/posts", data, (postData, status, xhr) => {
-        let html = createPostHtml(postData);
+        let html = createPostHtml(postData); // get html content (values)
         $(".postConteiner").prepend(html); // add element at the beginning NOT at the end
-        textbox.val("");
-        button.prop("disable", true);
+        textbox.val(""); // Clean up recent value of textarea
+        button.prop("disable", true); // turn off button "Post"
 
 
     });
 });
 
-function createPostHtml(postDate) {
-    return postDate.content;
+function createPostHtml(postData) {
+    // return html value of textarea
+    let postedBy = postData.postedBy;
+
+    return `<div class='post'>
+                <div class='mainContentContainer'>
+                    <div class='userImageContainer'>
+                        <img src='${postedBy.profilePic}'>
+                    </div>
+                    <div class='postContentContainer'>
+                        <div class='header'>
+                        </div>
+                        <div class='postBody'>
+                            <span>${postData.content}</span>
+                        </div>
+                        <div class='postFooter'>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
 }

@@ -183,5 +183,20 @@ textarea#postTextarea {
 }
 
 .postFooter .postButtonContainer button {
-    padding: 0 5px;
+    padding: 2px 5px;
+}
+
+.header a:link {
+    text-decoration: none;
+}
+
+.header a,
+.header span {
+    padding-right: 5px;
+}
+
+.postButtonContainer button:hover {
+    background-color: gainsboro;
+    color: var(--blue);
+    /*border-radius: 99%;*/
 }

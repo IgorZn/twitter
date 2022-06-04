@@ -42,7 +42,7 @@ function createPostHtml(postData) {
                     </div>
                     <div class='postContentContainer'>
                         <div class='header'>
-                            <a href="/profile/${postedBy.userName}">@${displayName}</a>
+                            <a class="displayName" href="/profile/${postedBy.userName}">@${displayName}</a>
                             <span class="username">${postedBy.userName}</span>
                             <span class="username">${timeStamp}</span>
                         </div>
@@ -50,6 +50,17 @@ function createPostHtml(postData) {
                             <span>${postData.content}</span>
                         </div>
                         <div class='postFooter'>
+                             <div class="postButtonContainer">
+                                <button>
+                                    <span class="material-symbols-outlined">mode_comment</span>
+                                </button>
+                                <button>
+                                    <span class="material-symbols-outlined">quickreply</span>
+                                </button>
+                                <button>
+                                    <span class="material-symbols-outlined">favorite</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

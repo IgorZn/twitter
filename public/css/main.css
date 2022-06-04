@@ -5,6 +5,7 @@
     --spacing: 15px;
     --blueLight: #9BD1F9;
     --greyText: rgb(101, 119, 134);
+    --greyButtonText: rgba(0,0,0,0.3);
 }
 
 * {
@@ -50,6 +51,12 @@ nav a:hover {
     background-color: var(--buttonHoverBg);
     color: var(--blue);
     border-radius: 50%;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    color: var(--greyButtonText);
 }
 
 .material-icons-outlined {
@@ -151,4 +158,30 @@ textarea#postTextarea {
 .username,
 .date {
     color: var(--greyText)
+}
+
+.displayName {
+    font-weight: bold;
+}
+
+/*.material-symbols-outlined {*/
+/*  font-variation-settings:*/
+/*  'FILL' 0,*/
+/*  'wght' 400,*/
+/*  'GRAD' 0,*/
+/*  'opsz' 48*/
+/*}*/
+
+.postFooter {
+    display: flex;
+    align-items: center;
+}
+
+.postFooter .postButtonContainer {
+    flex: 1;
+    display: flex;
+}
+
+.postFooter .postButtonContainer button {
+    padding: 0 5px;
 }

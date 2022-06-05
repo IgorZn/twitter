@@ -1,3 +1,6 @@
 $(window).on( "load", () => {
-    alert("It worked!");
-} );
+    $.get("/api/posts", results => {
+        console.log(results)
+
+    });
+});

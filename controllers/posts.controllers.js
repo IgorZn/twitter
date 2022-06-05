@@ -6,7 +6,12 @@ const User = require('../models/user.mongo');
 // @route       GET /api/posts
 // @access      Public
 exports.getPosts = asyncHandler( async (req, res, next) => {
-    return res.status(200).render("register")
+    Post.find()
+        .then(results => res.status(200).send(results))
+        .catch( error => {
+            console.log(error);
+            res.sendStatus(400);
+        })
 });
 
 

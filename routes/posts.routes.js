@@ -4,10 +4,11 @@ const router = express.Router();
 
 
 // controllers
-const { sendPosts } = require("../controllers/posts.controllers")
+const { sendPosts, getPosts } = require("../controllers/posts.controllers")
 
 // routes
 router.route('/')
+    .get(getPosts)
     .post(sendPosts)
 
 

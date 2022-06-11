@@ -7,6 +7,9 @@ const User = require('../models/user.mongo');
 // @access      Public
 exports.getPosts = asyncHandler( async (req, res, next) => {
     Post.find()
+        .populate({
+            path: 'postedBy',
+        })
         .then(results => res.status(200).send(results))
         .catch( error => {
             console.log(error);

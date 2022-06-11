@@ -10,6 +10,7 @@ exports.getPosts = asyncHandler( async (req, res, next) => {
         .populate({
             path: 'postedBy',
         })
+        .sort({"createdAt": -1})
         .then(results => res.status(200).send(results))
         .catch( error => {
             console.log(error);

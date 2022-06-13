@@ -10,7 +10,11 @@ const PostSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'User'
     },
-    pinned: Boolean
+    pinned: Boolean,
+    likes: [{
+        type: mongoose.Schema.ObjectId,
+        ref: 'User'
+    }]
 }, { timestamps: true });
 
 module.exports = mongoose.model('Post', PostSchema);

@@ -21,7 +21,7 @@ $("#submitPostButton").on("click", event => {
 
     $.post("/api/posts", data, (postData, status, xhr) => {
         let html = createPostHtml(postData); // get html content (values)
-        $(".postConteiner").prepend(html); // add element at the beginning NOT at the end
+        $(".postContainer").prepend(html); // add element at the beginning NOT at the end
         textbox.val(""); // Clean up recent value of textarea
         button.prop("disable", true); // turn off button "Post"
 

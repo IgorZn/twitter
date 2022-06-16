@@ -24,9 +24,11 @@ $("#submitPostButton").on("click", event => {
         $(".postContainer").prepend(html); // add element at the beginning NOT at the end
         textbox.val(""); // Clean up recent value of textarea
         button.prop("disable", true); // turn off button "Post"
-
-
     });
+});
+
+$(document).on("click", ".likeButton", event => {
+    alert('Clicked');
 });
 
 function createPostHtml(postData) {
@@ -62,7 +64,7 @@ function createPostHtml(postData) {
                                 <button>
                                     <span class="material-symbols-outlined">quickreply</span>
                                 </button>
-                                <button>
+                                <button class="likeButton">
                                     <span class="material-symbols-outlined">favorite</span>
                                 </button>
                             </div>

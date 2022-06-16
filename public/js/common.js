@@ -28,8 +28,20 @@ $("#submitPostButton").on("click", event => {
 });
 
 $(document).on("click", ".likeButton", event => {
-    alert('Clicked');
+    let button = $(event.target);
+    let postID = getPostID(button);
+    console.log(postID)
 });
+
+function getPostID(element) {
+    let isRoot = element.hasClass("post");
+    let rootElement = isRoot ? element : element.closest(".post");
+    let postID = rootElement.data().id;
+
+    if (!postID) return alert("Post ID undefined");
+
+    return postID;
+}
 
 function createPostHtml(postData) {
     // return html value of textarea
@@ -42,7 +54,7 @@ function createPostHtml(postData) {
     let displayName = `${postedBy.firstName} ${postedBy.lastName}`;
     let timeStamp = timeDifference(new Date(), new Date(postData.createdAt));
 
-    return `<div class='post'>
+    return `<div class='post' data-id="${postData._id}">
                 <div class='mainContentContainer'>
                     <div class='userImageContainer'>
                         <img src='${postedBy.profilePic}'>

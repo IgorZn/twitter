@@ -53,6 +53,9 @@ exports.sendPut = asyncHandler( async (req, res, next) => {
     const postId = req.params.id;
     const user = req.session.user._id;
 
+    /*
+    *   Если есть .likes или .likes включает postId
+    */
     const isLiked = req.session.user.likes && req.session.user.likes.includes(postId);
     const option = isLiked ? "$pull" : "$addToSet";
 
@@ -60,9 +63,13 @@ exports.sendPut = asyncHandler( async (req, res, next) => {
     *   Оператор $addToSet добавляет или добавляет значение в массив,
     *   только если значение не существует в массиве. $addToSet возвращает
     *   тот же массив без изменения, когда значение уже находится в массиве.
+    *
+    *   В MongoDB оператор $pull используется для удаления всех экземпляров
+    *   значения из существующего массива.
     */
+
     // Insert user like
-    await User.findByIdAndUpdate(user, { [option]: {likes: postId} })
+    req.session.user = await User.findByIdAndUpdate(user, { [option]: {likes: postId} }, { new: true })
 
     // Insert post like
 

@@ -50,17 +50,24 @@ exports.sendPosts = asyncHandler( async (req, res, next) => {
 // @route       PUT /api/posts/:id
 // @access      Private
 exports.sendPut = asyncHandler( async (req, res, next) => {
-    const post = await Post.findById(req.params.id);
+    const postId = req.params.id;
     const user = req.session.user._id;
 
-    const isLiked = req.session.user.likes && req.session.user.likes.includes(post);
+    const isLiked = req.session.user.likes && req.session.user.likes.includes(postId);
+    const option = isLiked ? "$pull" : "$addToSet";
 
+    /*
+    *   Оператор $addToSet добавляет или добавляет значение в массив,
+    *   только если значение не существует в массиве. $addToSet возвращает
+    *   тот же массив без изменения, когда значение уже находится в массиве.
+    */
     // Insert user like
+    await User.findByIdAndUpdate(user, { [option]: {likes: postId} })
 
     // Insert post like
 
-    if(post){
-        return res.status(200).send(post);
+    if(postId){
+        return res.status(200).send(postId);
     }
 
 });

@@ -50,7 +50,15 @@ exports.sendPosts = asyncHandler( async (req, res, next) => {
 // @route       PUT /api/posts/:id
 // @access      Private
 exports.sendPut = asyncHandler( async (req, res, next) => {
-    let post = await Post.findById(req.params.id);;
+    const post = await Post.findById(req.params.id);
+    const user = req.session.user._id;
+
+    const isLiked = req.session.user.likes && req.session.user.likes.includes(post);
+
+    // Insert user like
+
+    // Insert post like
+
     if(post){
         return res.status(200).send(post);
     }

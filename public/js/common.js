@@ -33,7 +33,7 @@ $(document).on("click", ".likeButton", event => {
     if(!postID) return;
 
     $.ajax({
-        url: `./api/posts/${postID}`,
+        url: `./api/posts/${postID}/like`,
         type: "PUT",
         success: (postData) => {
             console.log(postData);

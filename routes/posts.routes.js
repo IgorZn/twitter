@@ -12,7 +12,7 @@ router.route('/')
     .post(sendPosts)
 
 router
-    .route('/:id')
+    .route('/:id/like')
     .put(sendPut)
 
 

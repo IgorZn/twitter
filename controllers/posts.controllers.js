@@ -44,3 +44,15 @@ exports.sendPosts = asyncHandler( async (req, res, next) => {
         return res.status(201).send(newPost);
     };
 });
+
+
+// @desc        Send put
+// @route       PUT /api/posts/:id
+// @access      Private
+exports.sendPut = asyncHandler( async (req, res, next) => {
+    let post = await Post.findById(req.params.id);;
+    if(post){
+        return res.status(200).send(post);
+    }
+
+});
